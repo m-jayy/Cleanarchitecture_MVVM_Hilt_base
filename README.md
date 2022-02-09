@@ -5,7 +5,7 @@
 
 **Note: This is project based on MVVM clean architecture, Hilt, coroutines flow** 
   
-  ![github-large](https://github.com/m-jayy/ITalk/blob/master/screenshots/Screenshot_2020-09-25-10-39-52-71_45074af01a83076b0baa4d2e69ccd9d0.jpg)
+  ![github-large](https://github.com/m-jayy/Cleanarchitecture_MVVM_Hilt_base/blob/main/screenshots/diagram.png)
   
 
 
