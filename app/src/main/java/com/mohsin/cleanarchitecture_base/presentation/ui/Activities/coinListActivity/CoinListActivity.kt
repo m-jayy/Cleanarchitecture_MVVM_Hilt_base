@@ -1,33 +1,60 @@
-package com.mohsin.cryptocurrencyappyt.presentation.ui.Activities.coinListActivity
+package com.mohsin.cleanarchitecture_base.presentation.ui.Activities.coinListActivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
-import com.mohsin.cleanarchitecture_base.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.mohsin.cleanarchitecture_base.databinding.ActivityCoinListBinding
+import com.mohsin.cleanarchitecture_base.domain.helpers.Coroutines
+import com.mohsin.cleanarchitecture_base.presentation.ui.Activities.coinListActivity.adapters.CoinListAdapter
+import com.mohsin.cryptocurrencyappyt.domain.model.Coin
+import com.mohsin.cryptocurrencyappyt.presentation.ui.Activities.coinListActivity.CoinListViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class CoinListActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCoinListBinding
+
+
     private val viewModel by viewModels<CoinListViewModel>()
+
+    private var coinAdapter: CoinListAdapter? = null
+    private var coinListData: ArrayList<Coin?> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_coin_list)
+        val binding = ActivityCoinListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        viewModel.state.onEach { state ->
+        coinListData.let {
+            binding.rvDashboardCoin.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            coinAdapter = CoinListAdapter(it)
+            binding.rvDashboardCoin.adapter = coinAdapter
+        }
 
-            if (state.isLoading) {
-                Log.d("Check", "Loading")
-            }
-            if (state.error.isNotBlank()) {
-                Log.d("Check", "Error")
-            }
-            if (state.coins.isNotEmpty()) {
-                Log.d("Check", "${state.coins[0]}")
+        viewModel.state.onEach { it ->
+            if (it.error.isEmpty()) {
+                if (it.isLoading) {
+                    Coroutines.main {
+                        binding.shimmer.startShimmer()
+                    }
+                } else {
+                    binding.shimmer.stopShimmer()
+                    binding.shimmer.visibility = View.GONE
+                    binding.rvDashboardCoin.visibility = View.VISIBLE
+                    coinListData.addAll(it.coins)
+                    coinAdapter?.notifyDataSetChanged()
+                }
+            } else {
+                Toast.makeText(this, "${it.error}", Toast.LENGTH_SHORT).show()
             }
         }.launchIn(viewModel.viewModelScope)
     }

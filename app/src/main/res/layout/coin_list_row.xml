@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainContainerTop"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_70sdp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_64sdp"
+        android:background="@drawable/background_round_recovery"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gv60"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".6" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="@dimen/_56sdp"
+            android:layout_height="match_parent"
+            android:src="@drawable/binance"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mohsin.cleanarchitecture_base.presentation.ui.customComponents.TextView_N
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/_8sdp"
+            android:text="-"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toTopOf="@+id/tvAmountTitle"
+            app:layout_constraintLeft_toRightOf="@+id/profile_image"
+            app:layout_constraintRight_toLeftOf="@+id/arrow"
+            app:layout_constraintTop_toTopOf="@+id/profile_image" />
+
+        <com.mohsin.cleanarchitecture_base.presentation.ui.customComponents.TextView_N
+            android:id="@+id/tvAmountTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/_8sdp"
+            android:text="Amount"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+            app:layout_constraintLeft_toRightOf="@+id/profile_image"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+
+        <com.mohsin.cleanarchitecture_base.presentation.ui.customComponents.TextView_N
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/_18sdp"
+            android:text="-"
+            android:textColor="@color/app_red"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvAmountTitle"
+            app:layout_constraintRight_toLeftOf="@+id/arrow"
+            app:layout_constraintTop_toTopOf="@+id/tvAmountTitle" />
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:src="@drawable/arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_6sdp"
+        app:layout_constraintTop_toBottomOf="@+id/mainContainer" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

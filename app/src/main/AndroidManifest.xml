@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CleanArchitecture_MVVM_Hilt_DemoApp">
         <activity
-            android:name="com.mohsin.cryptocurrencyappyt.presentation.ui.Activities.coinListActivity.CoinListActivity"
+            android:name=".presentation.ui.Activities.coinListActivity.CoinListActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
